@@ -1,0 +1,99 @@
+{
+  "practice": {
+    "name": "Dunloggin Veterinary Hospital",
+    "shortName": "Dunloggin Vet",
+    "displayLines": [
+      "Dunloggin",
+      "Veterinary Hospital"
+    ],
+    "tagline": "Trusted veterinary care in Ellicott City since 1976.",
+    "description": "Dunloggin Veterinary Hospital is a full-service veterinary hospital in Ellicott City, Maryland providing medical, surgical, dental, diagnostic, and wellness care for dogs and cats.",
+    "serviceArea": "Ellicott City, Columbia, Catonsville, and Howard County, MD"
+  },
+  "brand": {
+    "logo": "/brand/dunloggin-logo.png",
+    "logoAlt": "Dunloggin Veterinary Hospital logo",
+    "colors": {
+      "light": "#FDFBF7",
+      "dark": "#24313F",
+      "accent": "#2F6F4E",
+      "accentLight": "#E8F0EB"
+    }
+  },
+  "contact": {
+    "phone": "(410) 465-6218",
+    "phoneHref": "tel:+14104656218",
+    "email": "dunlogginvethosp@yahoo.com",
+    "address": {
+      "street": "9105 Frederick Rd",
+      "line2": "",
+      "city": "Ellicott City",
+      "state": "MD",
+      "zip": "21042",
+      "country": "US"
+    }
+  },
+  "hours": [
+    [
+      "Monday",
+      "8:00 AM \u2013 7:00 PM"
+    ],
+    [
+      "Tuesday",
+      "8:00 AM \u2013 7:00 PM"
+    ],
+    [
+      "Wednesday",
+      "8:00 AM \u2013 7:00 PM"
+    ],
+    [
+      "Thursday",
+      "8:00 AM \u2013 7:00 PM"
+    ],
+    [
+      "Friday",
+      "8:00 AM \u2013 6:00 PM"
+    ],
+    [
+      "Saturday",
+      "8:00 AM \u2013 1:00 PM (select Saturdays closed in 2026)"
+    ],
+    [
+      "Sunday",
+      "Closed"
+    ]
+  ],
+  "links": {
+    "website": "https://dunlogginvet.com/",
+    "appointment": "",
+    "store": "",
+    "pharmacy": "",
+    "onlineForms": "https://dunlogginvet.com/wp-content/uploads/2017/01/Dunloggin-New-Client-Form.pdf",
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "googleBusinessProfile": ""
+  },
+  "team": [
+    {
+      "name": "Dr. Michael Shulkin",
+      "role": "Owner / Veterinarian",
+      "bio": "Maryland Distinguished Veterinarian Award recipient recognized for leadership, dedication, and commitment to the veterinary profession.",
+      "image": ""
+    },
+    {
+      "name": "Dunloggin Veterinary Team",
+      "role": "Veterinary Care Team",
+      "bio": "Experienced veterinarians and staff providing medical, surgical, dental, diagnostic, and preventive care for local dogs and cats.",
+      "image": ""
+    }
+  ],
+  "features": {
+    "clientPortal": true,
+    "onlineBooking": true,
+    "storeLink": false,
+    "pharmacyLink": false,
+    "onlineFormsLink": true,
+    "teamSection": true
+  }
+}

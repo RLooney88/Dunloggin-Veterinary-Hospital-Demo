@@ -1,5 +1,9 @@
 ﻿"""Async SQLAlchemy engine, session, and Base for Veterinary Site Template.
-Uses Postgres (hosted on Railway in prod, local in dev)."""
+
+Uses Postgres when DATABASE_URL is present. For prospecting/demo deployments,
+falls back to a local SQLite database so a static demo can publish without
+provisioning a paid/managed database first.
+"""
 import os
 from pathlib import Path
 
@@ -19,9 +23,19 @@ def _normalize_database_url(url: str) -> str:
     return url
 
 
-DATABASE_URL = _normalize_database_url(os.environ["DATABASE_URL"])
+def _default_sqlite_url() -> str:
+    db_path = Path(os.environ.get("SQLITE_DB_PATH", "/tmp/vet-demo.sqlite3"))
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    return f"sqlite+aiosqlite:///{db_path.as_posix()}"
 
-engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True, future=True)
+
+DATABASE_URL = _normalize_database_url(os.environ.get("DATABASE_URL") or _default_sqlite_url())
+
+engine_kwargs = {"echo": False, "future": True}
+if not DATABASE_URL.startswith("sqlite+"):
+    engine_kwargs["pool_pre_ping"] = True
+
+engine = create_async_engine(DATABASE_URL, **engine_kwargs)
 AsyncSessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 

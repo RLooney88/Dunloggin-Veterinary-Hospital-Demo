@@ -39,7 +39,7 @@
           }
         },
         {
-          "name": "Dogs \u2192 New Puppy",
+          "name": "Dogs → New Puppy",
           "rule": {
             "intent": "dogs",
             "sub_intent": "new_puppy"
@@ -58,7 +58,7 @@
           }
         },
         {
-          "name": "Dogs \u2192 Senior Care",
+          "name": "Dogs → Senior Care",
           "rule": {
             "intent": "dogs",
             "sub_intent": "senior"
@@ -95,7 +95,7 @@
           }
         },
         {
-          "name": "Cats \u2192 New Kitten",
+          "name": "Cats → New Kitten",
           "rule": {
             "intent": "cats",
             "sub_intent": "new_kitten"
@@ -534,46 +534,232 @@
       "slug": "home_proof",
       "name": "Proof / Testimonials",
       "page": "home",
-      "description": "Testimonials emphasised by intent.",
+      "description": "Testimonials categorized for SmartSite intent switching from original Dunloggin patient reviews.",
       "default_content": {
-        "heading": "Families across Ellicott City trust us with their pets.",
+        "heading": "Families across Ellicott City trust Dunloggin with generations of pets.",
+        "summary": "Patient reviews from Dunloggin’s original website, grouped for SmartSite proof moments.",
         "testimonials": [
           {
-            "quote": "the veterinarian's love, knowledge and respect for animals is unparalleled. She does not waste your money on unnecessary tests yet does everything she can to find the problem and get your pet healthy.",
-            "author": "Long-time client",
-            "tag": "Wellness"
+            "quote": "Always a great experience! All my pets have been patients here, even my childhood pets, going back 30+ years!",
+            "author": "Deborah Slater",
+            "tag": "Long-Term Trust",
+            "source": "Original website patient review",
+            "source_date": "2019-01-31",
+            "category": "long_term_client",
+            "intent": "dogs_cats",
+            "sub_intent": "wellness"
           },
           {
-            "quote": "If I could give Dunloggin Veterinary Hospital more stars, I would! From their receptionists to techs to doctors, they are all kind, attentive, understanding and knowledgeable.",
-            "author": "First-time dog owner",
-            "tag": "New Puppy"
+            "quote": "Very happy with our first visit with my Tucker! Dr. Holland and her team were wonderful, patient and reassuring with my Tucker, who has anxiety at the vets.",
+            "author": "Theresa Morgan",
+            "tag": "Anxious Pets",
+            "source": "Original website patient review",
+            "source_date": "2019-01-13",
+            "category": "new_patient_anxious_pet",
+            "intent": "dogs",
+            "sub_intent": "wellness"
           },
           {
-            "quote": "The team performed orthopedic surgery on my beagle. She is pretty much back to her normal self. Everyone is very friendly and professional.",
-            "author": "Beagle mom",
-            "tag": "Surgery"
+            "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
+            "author": "Kate Puchek",
+            "tag": "Gentle Care",
+            "source": "Original website patient review",
+            "source_date": "2019-01-09",
+            "category": "new_patient_gentle_care",
+            "intent": "dogs",
+            "sub_intent": "wellness"
+          },
+          {
+            "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+            "author": "Client review",
+            "tag": "Clear Guidance",
+            "source": "Original website patient review",
+            "source_date": "2019-01-07",
+            "category": "trust_value_communication",
+            "sub_intent": "wellness"
+          },
+          {
+            "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
+            "author": "Karen Mitchell",
+            "tag": "Professional Team",
+            "source": "Original website patient review",
+            "source_date": null,
+            "category": "long_term_client",
+            "sub_intent": "wellness"
+          },
+          {
+            "quote": "Ivan had a cough that concerned us. He was fitted in and given exemplar care as usual. The veterinarian and staff calmed our fears and made Ivan very comfortable during the exam.",
+            "author": "Janet Sentz",
+            "tag": "Health Concerns",
+            "source": "Original website patient review",
+            "source_date": "2019-01-22",
+            "category": "urgent_sick_visit",
+            "sub_intent": "health_concerns"
           }
         ]
       },
       "switches": [
         {
-          "name": "Surgery emphasis",
+          "name": "Health concerns and urgent visit reassurance",
           "rule": {
-            "sub_intent": "treatments"
+            "sub_intent": "health_concerns"
           },
           "priority": 100,
           "content": {
-            "heading": "Recovery stories from our families.",
+            "heading": "Calm, responsive care when something feels wrong.",
+            "summary": "Reviews that reinforce triage, reassurance, and comfort during sick or concerning visits.",
             "testimonials": [
               {
-                "quote": "The team performed orthopedic surgery on my beagle. She is pretty much back to her normal self.",
-                "author": "Beagle mom",
-                "tag": "Surgery"
+                "quote": "Ivan had a cough that concerned us. He was fitted in and given exemplar care as usual. The veterinarian and staff calmed our fears and made Ivan very comfortable during the exam.",
+                "author": "Janet Sentz",
+                "tag": "Health Concerns",
+                "source": "Original website patient review",
+                "source_date": "2019-01-22",
+                "category": "urgent_sick_visit",
+                "sub_intent": "health_concerns"
               },
               {
-                "quote": "The care team did the follow-up laser treatment. Everyone is very friendly and professional.",
-                "author": "Post-op client",
-                "tag": "Laser Therapy"
+                "quote": "Thank you for squeezing us in, especially as a new patient! We look forward to a wonderful relationship with you all for my fur babies. I appreciate you!",
+                "author": "New client",
+                "tag": "New Patients",
+                "source": "Original website patient review",
+                "source_date": "2018-12-06",
+                "category": "new_patient_access",
+                "sub_intent": "health_concerns"
+              },
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness"
+              }
+            ]
+          }
+        },
+        {
+          "name": "New patient and anxious pet reassurance",
+          "rule": {
+            "intent": "dogs",
+            "sub_intent": "wellness"
+          },
+          "priority": 90,
+          "content": {
+            "heading": "Gentle first visits for dogs who need patience.",
+            "summary": "Reviews that support dog-owner visitors looking for a calm, trustworthy first appointment.",
+            "testimonials": [
+              {
+                "quote": "Very happy with our first visit with my Tucker! Dr. Holland and her team were wonderful, patient and reassuring with my Tucker, who has anxiety at the vets.",
+                "author": "Theresa Morgan",
+                "tag": "Anxious Pets",
+                "source": "Original website patient review",
+                "source_date": "2019-01-13",
+                "category": "new_patient_anxious_pet",
+                "intent": "dogs",
+                "sub_intent": "wellness"
+              },
+              {
+                "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
+                "author": "Kate Puchek",
+                "tag": "Gentle Care",
+                "source": "Original website patient review",
+                "source_date": "2019-01-09",
+                "category": "new_patient_gentle_care",
+                "intent": "dogs",
+                "sub_intent": "wellness"
+              },
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Long-term wellness trust",
+          "rule": {
+            "sub_intent": "wellness"
+          },
+          "priority": 80,
+          "content": {
+            "heading": "Trusted by families for years of everyday care.",
+            "summary": "Reviews that emphasize long-term relationships, routine care, and professional staff.",
+            "testimonials": [
+              {
+                "quote": "Always a great experience! All my pets have been patients here, even my childhood pets, going back 30+ years!",
+                "author": "Deborah Slater",
+                "tag": "Long-Term Trust",
+                "source": "Original website patient review",
+                "source_date": "2019-01-31",
+                "category": "long_term_client",
+                "intent": "dogs_cats",
+                "sub_intent": "wellness"
+              },
+              {
+                "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
+                "author": "Karen Mitchell",
+                "tag": "Professional Team",
+                "source": "Original website patient review",
+                "source_date": null,
+                "category": "long_term_client",
+                "sub_intent": "wellness"
+              },
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Treatments and surgery confidence",
+          "rule": {
+            "sub_intent": "treatments"
+          },
+          "priority": 70,
+          "content": {
+            "heading": "Care that feels thorough, patient, and trustworthy.",
+            "summary": "Dunloggin’s published reviews did not include procedure-specific quotes, so this treatment proof uses trust and communication reviews.",
+            "testimonials": [
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness"
+              },
+              {
+                "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
+                "author": "Kate Puchek",
+                "tag": "Gentle Care",
+                "source": "Original website patient review",
+                "source_date": "2019-01-09",
+                "category": "new_patient_gentle_care",
+                "intent": "dogs",
+                "sub_intent": "wellness"
+              },
+              {
+                "quote": "Ivan had a cough that concerned us. He was fitted in and given exemplar care as usual. The veterinarian and staff calmed our fears and made Ivan very comfortable during the exam.",
+                "author": "Janet Sentz",
+                "tag": "Health Concerns",
+                "source": "Original website patient review",
+                "source_date": "2019-01-22",
+                "category": "urgent_sick_visit",
+                "sub_intent": "health_concerns"
               }
             ]
           }
@@ -590,7 +776,7 @@
         "items": [
           {
             "q": "My new puppy needs vaccines, how soon should we come in?",
-            "a": "As early as 6\u20138 weeks for the first puppy visit. We'll design a vaccine schedule based on your puppy's age and lifestyle and talk through spay/neuter timing, house-training, and nutrition.",
+            "a": "As early as 6–8 weeks for the first puppy visit. We'll design a vaccine schedule based on your puppy's age and lifestyle and talk through spay/neuter timing, house-training, and nutrition.",
             "intent": "dogs",
             "sub_intent": "new_puppy"
           },

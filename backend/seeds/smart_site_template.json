@@ -547,7 +547,9 @@
             "source_date": "2019-01-31",
             "category": "long_term_client",
             "intent": "dogs_cats",
-            "sub_intent": "wellness"
+            "sub_intent": "wellness",
+            "audience_category": "general",
+            "review_category": "general"
           },
           {
             "quote": "Very happy with our first visit with my Tucker! Dr. Holland and her team were wonderful, patient and reassuring with my Tucker, who has anxiety at the vets.",
@@ -557,7 +559,9 @@
             "source_date": "2019-01-13",
             "category": "new_patient_anxious_pet",
             "intent": "dogs",
-            "sub_intent": "wellness"
+            "sub_intent": "wellness",
+            "audience_category": "dog",
+            "review_category": "dog"
           },
           {
             "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
@@ -567,7 +571,9 @@
             "source_date": "2019-01-09",
             "category": "new_patient_gentle_care",
             "intent": "dogs",
-            "sub_intent": "wellness"
+            "sub_intent": "wellness",
+            "audience_category": "dog",
+            "review_category": "dog"
           },
           {
             "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
@@ -576,7 +582,9 @@
             "source": "Original website patient review",
             "source_date": "2019-01-07",
             "category": "trust_value_communication",
-            "sub_intent": "wellness"
+            "sub_intent": "wellness",
+            "audience_category": "general",
+            "review_category": "general"
           },
           {
             "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
@@ -585,7 +593,9 @@
             "source": "Original website patient review",
             "source_date": null,
             "category": "long_term_client",
-            "sub_intent": "wellness"
+            "sub_intent": "wellness",
+            "audience_category": "general",
+            "review_category": "general"
           },
           {
             "quote": "Ivan had a cough that concerned us. He was fitted in and given exemplar care as usual. The veterinarian and staff calmed our fears and made Ivan very comfortable during the exam.",
@@ -594,7 +604,9 @@
             "source": "Original website patient review",
             "source_date": "2019-01-22",
             "category": "urgent_sick_visit",
-            "sub_intent": "health_concerns"
+            "sub_intent": "health_concerns",
+            "audience_category": "general",
+            "review_category": "general"
           }
         ]
       },
@@ -616,7 +628,9 @@
                 "source": "Original website patient review",
                 "source_date": "2019-01-22",
                 "category": "urgent_sick_visit",
-                "sub_intent": "health_concerns"
+                "sub_intent": "health_concerns",
+                "audience_category": "general",
+                "review_category": "general"
               },
               {
                 "quote": "Thank you for squeezing us in, especially as a new patient! We look forward to a wonderful relationship with you all for my fur babies. I appreciate you!",
@@ -625,7 +639,9 @@
                 "source": "Original website patient review",
                 "source_date": "2018-12-06",
                 "category": "new_patient_access",
-                "sub_intent": "health_concerns"
+                "sub_intent": "health_concerns",
+                "audience_category": "general",
+                "review_category": "general"
               },
               {
                 "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
@@ -634,7 +650,9 @@
                 "source": "Original website patient review",
                 "source_date": "2019-01-07",
                 "category": "trust_value_communication",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
               }
             ]
           }
@@ -658,7 +676,9 @@
                 "source_date": "2019-01-13",
                 "category": "new_patient_anxious_pet",
                 "intent": "dogs",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
               },
               {
                 "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
@@ -668,7 +688,9 @@
                 "source_date": "2019-01-09",
                 "category": "new_patient_gentle_care",
                 "intent": "dogs",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
               },
               {
                 "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
@@ -677,7 +699,9 @@
                 "source": "Original website patient review",
                 "source_date": "2019-01-07",
                 "category": "trust_value_communication",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
               }
             ]
           }
@@ -700,7 +724,9 @@
                 "source_date": "2019-01-31",
                 "category": "long_term_client",
                 "intent": "dogs_cats",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
               },
               {
                 "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
@@ -709,7 +735,9 @@
                 "source": "Original website patient review",
                 "source_date": null,
                 "category": "long_term_client",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
               },
               {
                 "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
@@ -718,7 +746,9 @@
                 "source": "Original website patient review",
                 "source_date": "2019-01-07",
                 "category": "trust_value_communication",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
               }
             ]
           }
@@ -740,7 +770,9 @@
                 "source": "Original website patient review",
                 "source_date": "2019-01-07",
                 "category": "trust_value_communication",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
               },
               {
                 "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
@@ -750,7 +782,9 @@
                 "source_date": "2019-01-09",
                 "category": "new_patient_gentle_care",
                 "intent": "dogs",
-                "sub_intent": "wellness"
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
               },
               {
                 "quote": "Ivan had a cough that concerned us. He was fitted in and given exemplar care as usual. The veterinarian and staff calmed our fears and made Ivan very comfortable during the exam.",
@@ -759,7 +793,220 @@
                 "source": "Original website patient review",
                 "source_date": "2019-01-22",
                 "category": "urgent_sick_visit",
-                "sub_intent": "health_concerns"
+                "sub_intent": "health_concerns",
+                "audience_category": "general",
+                "review_category": "general"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dog review audience",
+          "rule": {
+            "intent": "dogs"
+          },
+          "priority": 55,
+          "content": {
+            "heading": "Dog owners notice the gentle, patient care.",
+            "summary": "Dog-specific reviews from Dunloggin’s original website.",
+            "testimonials": [
+              {
+                "quote": "Very happy with our first visit with my Tucker! Dr. Holland and her team were wonderful, patient and reassuring with my Tucker, who has anxiety at the vets.",
+                "author": "Theresa Morgan",
+                "tag": "Anxious Pets",
+                "source": "Original website patient review",
+                "source_date": "2019-01-13",
+                "category": "new_patient_anxious_pet",
+                "intent": "dogs",
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
+              },
+              {
+                "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
+                "author": "Kate Puchek",
+                "tag": "Gentle Care",
+                "source": "Original website patient review",
+                "source_date": "2019-01-09",
+                "category": "new_patient_gentle_care",
+                "intent": "dogs",
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Cat review audience",
+          "rule": {
+            "intent": "cats"
+          },
+          "priority": 55,
+          "content": {
+            "heading": "Trusted by pet families across Ellicott City.",
+            "summary": "The source site did not publish cat-specific review text, so this uses general Dunloggin family reviews without implying cat-only claims.",
+            "testimonials": [
+              {
+                "quote": "Always a great experience! All my pets have been patients here, even my childhood pets, going back 30+ years!",
+                "author": "Deborah Slater",
+                "tag": "Long-Term Trust",
+                "source": "Original website patient review",
+                "source_date": "2019-01-31",
+                "category": "long_term_client",
+                "intent": "dogs_cats",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
+                "author": "Karen Mitchell",
+                "tag": "Professional Team",
+                "source": "Original website patient review",
+                "source_date": null,
+                "category": "long_term_client",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Small animal review audience",
+          "rule": {
+            "intent": "critters"
+          },
+          "priority": 55,
+          "content": {
+            "heading": "Trusted care for pets and the families who love them.",
+            "summary": "The source site did not publish small-animal-specific review text, so this uses general Dunloggin trust reviews without implying exotic-pet claims.",
+            "testimonials": [
+              {
+                "quote": "Always a great experience! All my pets have been patients here, even my childhood pets, going back 30+ years!",
+                "author": "Deborah Slater",
+                "tag": "Long-Term Trust",
+                "source": "Original website patient review",
+                "source_date": "2019-01-31",
+                "category": "long_term_client",
+                "intent": "dogs_cats",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
+                "author": "Karen Mitchell",
+                "tag": "Professional Team",
+                "source": "Original website patient review",
+                "source_date": null,
+                "category": "long_term_client",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              }
+            ]
+          }
+        },
+        {
+          "name": "General review audience",
+          "rule": {},
+          "priority": 120,
+          "content": {
+            "heading": "Families across Ellicott City trust Dunloggin with generations of pets.",
+            "summary": "Patient reviews from Dunloggin’s original website, grouped for SmartSite proof moments.",
+            "testimonials": [
+              {
+                "quote": "Always a great experience! All my pets have been patients here, even my childhood pets, going back 30+ years!",
+                "author": "Deborah Slater",
+                "tag": "Long-Term Trust",
+                "source": "Original website patient review",
+                "source_date": "2019-01-31",
+                "category": "long_term_client",
+                "intent": "dogs_cats",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "Very happy with our first visit with my Tucker! Dr. Holland and her team were wonderful, patient and reassuring with my Tucker, who has anxiety at the vets.",
+                "author": "Theresa Morgan",
+                "tag": "Anxious Pets",
+                "source": "Original website patient review",
+                "source_date": "2019-01-13",
+                "category": "new_patient_anxious_pet",
+                "intent": "dogs",
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
+              },
+              {
+                "quote": "My 1st visit to Dunloggin solidified the care and professionalism reflected in their reviews. Dr. Beeson was gentle and kind with my very shy dog and acted according to her comfort level.",
+                "author": "Kate Puchek",
+                "tag": "Gentle Care",
+                "source": "Original website patient review",
+                "source_date": "2019-01-09",
+                "category": "new_patient_gentle_care",
+                "intent": "dogs",
+                "sub_intent": "wellness",
+                "audience_category": "dog",
+                "review_category": "dog"
+              },
+              {
+                "quote": "You lived up to your tremendous reviews! I felt like I was being heard and not taken advantage of to spend more money. Our doctor was patient, very friendly and knowledgeable.",
+                "author": "Client review",
+                "tag": "Clear Guidance",
+                "source": "Original website patient review",
+                "source_date": "2019-01-07",
+                "category": "trust_value_communication",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "I’ve had all of my pets at Dunloggin for many years. All of the staff there are always professional, courteous, and kind.",
+                "author": "Karen Mitchell",
+                "tag": "Professional Team",
+                "source": "Original website patient review",
+                "source_date": null,
+                "category": "long_term_client",
+                "sub_intent": "wellness",
+                "audience_category": "general",
+                "review_category": "general"
+              },
+              {
+                "quote": "Ivan had a cough that concerned us. He was fitted in and given exemplar care as usual. The veterinarian and staff calmed our fears and made Ivan very comfortable during the exam.",
+                "author": "Janet Sentz",
+                "tag": "Health Concerns",
+                "source": "Original website patient review",
+                "source_date": "2019-01-22",
+                "category": "urgent_sick_visit",
+                "sub_intent": "health_concerns",
+                "audience_category": "general",
+                "review_category": "general"
               }
             ]
           }

@@ -604,7 +604,7 @@
           "rule": {
             "sub_intent": "health_concerns"
           },
-          "priority": 100,
+          "priority": 40,
           "content": {
             "heading": "Calm, responsive care when something feels wrong.",
             "summary": "Reviews that reinforce triage, reassurance, and comfort during sick or concerning visits.",
@@ -645,7 +645,7 @@
             "intent": "dogs",
             "sub_intent": "wellness"
           },
-          "priority": 90,
+          "priority": 50,
           "content": {
             "heading": "Gentle first visits for dogs who need patience.",
             "summary": "Reviews that support dog-owner visitors looking for a calm, trustworthy first appointment.",
@@ -728,7 +728,7 @@
           "rule": {
             "sub_intent": "treatments"
           },
-          "priority": 70,
+          "priority": 60,
           "content": {
             "heading": "Care that feels thorough, patient, and trustworthy.",
             "summary": "Dunloggin’s published reviews did not include procedure-specific quotes, so this treatment proof uses trust and communication reviews.",

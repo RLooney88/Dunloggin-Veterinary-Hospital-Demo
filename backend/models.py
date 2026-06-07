@@ -18,13 +18,22 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     Integer,
+    JSON,
     String,
     Text,
 )
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from database import Base
+from database import Base, DATABASE_URL
+
+
+IS_SQLITE = DATABASE_URL.startswith("sqlite+")
+JSONType = JSON if IS_SQLITE else JSONB
+
+
+def UUIDType():
+    return String(36) if IS_SQLITE else PG_UUID(as_uuid=False)
 
 
 def _utcnow() -> datetime:
@@ -38,7 +47,7 @@ def _uuid() -> str:
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     name: Mapped[str] = mapped_column(String(120), default="Admin")
@@ -49,12 +58,12 @@ class User(Base):
 class VisitorSession(Base):
     __tablename__ = "visitor_sessions"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     session_token: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
     parent_intent: Mapped[str | None] = mapped_column(String(32), nullable=True)  # dogs|cats|critters
     sub_intent: Mapped[str | None] = mapped_column(String(64), nullable=True)
-    intent_scores: Mapped[dict] = mapped_column(JSONB, default=dict)  # {dogs:3, cats:1,...}
-    sub_intent_scores: Mapped[dict] = mapped_column(JSONB, default=dict)
+    intent_scores: Mapped[dict] = mapped_column(JSONType, default=dict)  # {dogs:3, cats:1,...}
+    sub_intent_scores: Mapped[dict] = mapped_column(JSONType, default=dict)
     first_referrer: Mapped[str | None] = mapped_column(Text, nullable=True)
     user_agent: Mapped[str | None] = mapped_column(Text, nullable=True)
     page_view_count: Mapped[int] = mapped_column(Integer, default=0)
@@ -70,9 +79,9 @@ class VisitorSession(Base):
 class SignalEvent(Base):
     __tablename__ = "signal_events"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     session_id: Mapped[str] = mapped_column(
-        UUID(as_uuid=False), ForeignKey("visitor_sessions.id", ondelete="CASCADE"), index=True
+        UUIDType(), ForeignKey("visitor_sessions.id", ondelete="CASCADE"), index=True
     )
     signal_type: Mapped[str] = mapped_column(String(64), nullable=False)  # page_view, cta_click, form_start, etc.
     page_path: Mapped[str | None] = mapped_column(String(512), nullable=True)
@@ -80,7 +89,7 @@ class SignalEvent(Base):
     intent: Mapped[str | None] = mapped_column(String(32), nullable=True)
     sub_intent: Mapped[str | None] = mapped_column(String(64), nullable=True)
     strength: Mapped[int] = mapped_column(Integer, default=1)
-    meta: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta: Mapped[dict] = mapped_column(JSONType, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow, index=True)
 
     session: Mapped["VisitorSession"] = relationship(back_populates="events")
@@ -89,12 +98,12 @@ class SignalEvent(Base):
 class Surface(Base):
     __tablename__ = "surfaces"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     slug: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     page: Mapped[str] = mapped_column(String(64), default="home")  # home, appointment, service, etc.
-    default_content: Mapped[dict] = mapped_column(JSONB, default=dict)
+    default_content: Mapped[dict] = mapped_column(JSONType, default=dict)
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
     updated_at: Mapped[datetime] = mapped_column(
@@ -109,14 +118,14 @@ class Surface(Base):
 class Switch(Base):
     __tablename__ = "switches"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     surface_id: Mapped[str] = mapped_column(
-        UUID(as_uuid=False), ForeignKey("surfaces.id", ondelete="CASCADE"), index=True
+        UUIDType(), ForeignKey("surfaces.id", ondelete="CASCADE"), index=True
     )
     name: Mapped[str] = mapped_column(String(160), nullable=False)
     # Rule: {"intent":"dogs","sub_intent":"new_puppy","min_strength":0}
-    rule: Mapped[dict] = mapped_column(JSONB, default=dict)
-    content: Mapped[dict] = mapped_column(JSONB, default=dict)  # freeform (headline, image, cta...)
+    rule: Mapped[dict] = mapped_column(JSONType, default=dict)
+    content: Mapped[dict] = mapped_column(JSONType, default=dict)  # freeform (headline, image, cta...)
     priority: Mapped[int] = mapped_column(Integer, default=100)  # lower = higher priority
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
@@ -130,9 +139,9 @@ class Switch(Base):
 class LeadSubmission(Base):
     __tablename__ = "lead_submissions"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     session_id: Mapped[str | None] = mapped_column(
-        UUID(as_uuid=False), ForeignKey("visitor_sessions.id", ondelete="SET NULL"), nullable=True
+        UUIDType(), ForeignKey("visitor_sessions.id", ondelete="SET NULL"), nullable=True
     )
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     email: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -143,8 +152,8 @@ class LeadSubmission(Base):
     comment: Mapped[str | None] = mapped_column(Text, nullable=True)
     preferred_time: Mapped[str | None] = mapped_column(String(120), nullable=True)
     source_page: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    intent_summary: Mapped[dict] = mapped_column(JSONB, default=dict)
-    signal_trail: Mapped[list] = mapped_column(JSONB, default=list)
+    intent_summary: Mapped[dict] = mapped_column(JSONType, default=dict)
+    signal_trail: Mapped[list] = mapped_column(JSONType, default=list)
     narrative_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
     status: Mapped[str] = mapped_column(String(32), default="new")  # new|contacted|closed
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow, index=True)
@@ -155,11 +164,11 @@ class LeadSubmission(Base):
 class WebhookConfig(Base):
     __tablename__ = "webhook_configs"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     url: Mapped[str] = mapped_column(Text, nullable=False)
     event_type: Mapped[str] = mapped_column(String(64), default="lead_created")  # lead_created, etc.
-    headers: Mapped[dict] = mapped_column(JSONB, default=dict)  # custom headers (auth tokens, etc.)
+    headers: Mapped[dict] = mapped_column(JSONType, default=dict)  # custom headers (auth tokens, etc.)
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     last_fired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     last_status_code: Mapped[int | None] = mapped_column(Integer, nullable=True)
@@ -173,7 +182,7 @@ class WebhookConfig(Base):
 class ChatbotConfig(Base):
     __tablename__ = "chatbot_config"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     system_prompt: Mapped[str] = mapped_column(Text, nullable=False)
     training_context: Mapped[str] = mapped_column(Text, default="")  # extra knowledge the admin adds
     guardrails: Mapped[str] = mapped_column(Text, default="")
@@ -190,7 +199,7 @@ class ChatbotConfig(Base):
 class ChatMessage(Base):
     __tablename__ = "chat_messages"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     session_token: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
     role: Mapped[str] = mapped_column(String(16), nullable=False)  # user | assistant
     content: Mapped[str] = mapped_column(Text, nullable=False)
@@ -201,7 +210,7 @@ class ChatBooking(Base):
     """Demo bookings created by the chatbot when it collects full contact + pet info."""
     __tablename__ = "chat_bookings"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     session_token: Mapped[str | None] = mapped_column(String(64), index=True, nullable=True)
     client_name: Mapped[str] = mapped_column(String(160), nullable=False)
     client_phone: Mapped[str] = mapped_column(String(64), nullable=False)
@@ -218,7 +227,7 @@ class SiteEditRequest(Base):
     """Local audit/status row for requests forwarded to Nova Site Editor."""
     __tablename__ = "site_edit_requests"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     client_request_id: Mapped[str] = mapped_column(String(160), unique=True, nullable=False, index=True)
     nova_request_id: Mapped[str | None] = mapped_column(String(160), nullable=True, index=True)
     nova_thread_id: Mapped[str | None] = mapped_column(String(160), nullable=True)
@@ -229,9 +238,9 @@ class SiteEditRequest(Base):
     submitter_name: Mapped[str] = mapped_column(String(160), nullable=False)
     submitter_email: Mapped[str] = mapped_column(String(255), nullable=False)
     approval_required: Mapped[bool] = mapped_column(Boolean, default=True)
-    nova_payload: Mapped[dict] = mapped_column(JSONB, default=dict)
-    nova_response: Mapped[dict] = mapped_column(JSONB, default=dict)
-    callback_payloads: Mapped[list] = mapped_column(JSONB, default=list)
+    nova_payload: Mapped[dict] = mapped_column(JSONType, default=dict)
+    nova_response: Mapped[dict] = mapped_column(JSONType, default=dict)
+    callback_payloads: Mapped[list] = mapped_column(JSONType, default=list)
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow, index=True)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow, onupdate=_utcnow)
@@ -241,7 +250,7 @@ class SiteEditRequest(Base):
 class Client(Base):
     __tablename__ = "clients"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     first_name: Mapped[str] = mapped_column(String(120), nullable=False)
@@ -255,7 +264,7 @@ class Client(Base):
 class Pet(Base):
     __tablename__ = "pets"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     species: Mapped[str] = mapped_column(String(32), nullable=False)  # dog, cat, rabbit, etc.
     breed: Mapped[str | None] = mapped_column(String(120), nullable=True)
@@ -276,9 +285,9 @@ class Pet(Base):
 class ClientPetLink(Base):
     __tablename__ = "client_pet_links"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    client_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("clients.id", ondelete="CASCADE"), index=True)
-    pet_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
+    client_id: Mapped[str] = mapped_column(UUIDType(), ForeignKey("clients.id", ondelete="CASCADE"), index=True)
+    pet_id: Mapped[str] = mapped_column(UUIDType(), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
     role: Mapped[str] = mapped_column(String(32), default="owner")  # owner, co-owner, caretaker
 
     client: Mapped["Client"] = relationship(back_populates="pet_links")
@@ -288,8 +297,8 @@ class ClientPetLink(Base):
 class PetContact(Base):
     __tablename__ = "pet_contacts"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    pet_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
+    pet_id: Mapped[str] = mapped_column(UUIDType(), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     relation: Mapped[str] = mapped_column(String(64), default="owner")  # owner, spouse, emergency, caretaker
     phone: Mapped[str | None] = mapped_column(String(64), nullable=True)
@@ -301,8 +310,8 @@ class PetContact(Base):
 class PetHealthRecord(Base):
     __tablename__ = "pet_health_records"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    pet_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
+    pet_id: Mapped[str] = mapped_column(UUIDType(), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
     record_type: Mapped[str] = mapped_column(String(64), nullable=False)  # vaccination, bloodwork, fecal, dental
     name: Mapped[str] = mapped_column(String(160), nullable=False)  # e.g. "Rabies", "DHPP", "CBC Panel"
     date_performed: Mapped[str] = mapped_column(String(32), nullable=False)  # YYYY-MM-DD
@@ -316,8 +325,8 @@ class PetHealthRecord(Base):
 class PetAppointment(Base):
     __tablename__ = "pet_appointments"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    pet_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
+    pet_id: Mapped[str] = mapped_column(UUIDType(), ForeignKey("pets.id", ondelete="CASCADE"), index=True)
     date: Mapped[str] = mapped_column(String(32), nullable=False)
     reason: Mapped[str] = mapped_column(String(255), nullable=False)
     provider: Mapped[str | None] = mapped_column(String(120), nullable=True)
@@ -334,7 +343,7 @@ class AppointmentType(Base):
     """A bookable appointment kind (Wellness, Dental, Urgent, etc.)."""
     __tablename__ = "appointment_types"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     duration_mins: Mapped[int] = mapped_column(Integer, default=30, nullable=False)
@@ -353,7 +362,7 @@ class ClinicHours(Base):
     """One row per weekday defining open/close times and whether the clinic is open."""
     __tablename__ = "clinic_hours"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     # 0 = Monday ... 6 = Sunday (ISO-ish). Unique per day.
     day_of_week: Mapped[int] = mapped_column(Integer, unique=True, nullable=False)
     is_open: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -365,7 +374,7 @@ class StaffConfig(Base):
     """Singleton row defining staffing capacity."""
     __tablename__ = "staff_config"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     num_doctors: Mapped[int] = mapped_column(Integer, default=1)
     num_techs: Mapped[int] = mapped_column(Integer, default=2)
     # Minimum granularity for booking start times, in minutes.
@@ -381,7 +390,7 @@ class BlockedTime(Base):
     """Admin-defined blackout ranges (holidays, training, surgery days)."""
     __tablename__ = "blocked_times"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     reason: Mapped[str | None] = mapped_column(String(255), nullable=True)
     starts_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
     ends_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
@@ -394,12 +403,12 @@ class Appointment(Base):
     """A booked appointment tied (optionally) to a lead submission."""
     __tablename__ = "appointments"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    id: Mapped[str] = mapped_column(UUIDType(), primary_key=True, default=_uuid)
     lead_id: Mapped[str | None] = mapped_column(
-        UUID(as_uuid=False), ForeignKey("lead_submissions.id", ondelete="SET NULL"), nullable=True, index=True
+        UUIDType(), ForeignKey("lead_submissions.id", ondelete="SET NULL"), nullable=True, index=True
     )
     appointment_type_id: Mapped[str | None] = mapped_column(
-        UUID(as_uuid=False), ForeignKey("appointment_types.id", ondelete="SET NULL"), nullable=True
+        UUIDType(), ForeignKey("appointment_types.id", ondelete="SET NULL"), nullable=True
     )
     # Denormalised for fast admin display and surviving deleted types.
     appointment_type_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
